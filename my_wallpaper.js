@@ -1,15 +1,17 @@
 //your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 20;
 let smol = 25;
+
+//colour variables
 let greem;
 let greemer;
 let reb;
 let wite;
 let bleck;
+let yell;
+let yellow;
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
   //DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
   pWallpaper.resolution(FIT_TO_SCREEN);
   //FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3, 
@@ -20,22 +22,27 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.grid_settings.cell_height = 200;
   pWallpaper.grid_settings.row_offset  = 100;
 
+  angleMode(DEGREES);
+
   //Defining colours
   greem = color(20, 250, 20);
   greemer = color(20, 200, 20);
   reb = color(255, 0, 21);
   wite = color(255, 255, 255);
   bleck = color(0,0,0);
+  yell = color(235, 235, 150);
+  yellow = color(235, 235, 110);
 }
 
 function wallpaper_background() {
   //background(240, 255, 240); //light honeydew green colour
-  background(150, 150, 225);
+  //background(150, 150, 225); //bluey purple thing
+  background(170, 170, 225);
 }
 
 function fillIn(colour) {
   fill(colour);
-  //stroke(colour);
+  stroke(colour);
 }
 
 function kermi() {
@@ -67,7 +74,7 @@ function kermi() {
   ellipse(115, 70, smol, smol); //eye r
 
   fillIn(reb);
-  arc(100, 100, 50, 40, 0, PI); //smile
+  arc(100, 100, 50, 40, PI, 0); //smile
 
   fillIn(greem);
   triangle(70, 100, 130, 100, 100, 105); //up lip
@@ -79,11 +86,29 @@ function kermi() {
   fillIn(bleck);
   ellipse(85, 72, 6, 6); //pupil l
   ellipse(115, 72, 6, 6); //pupil r
-  line(77, 73, 94, 71);
-  line(107, 71, 124, 73);
+  line(77, 73, 94, 71); //eyestick l
+  line(107, 71, 124, 73); //eyestick r
+}
+
+function ducky() {
+  var dhead = 40;
+  var dbod = 60;
+
+  fillIn(yellow);
+  triangle(30, 50, 60, 80, 30, 80);
+  ellipse(60, 50, dbod, dbod);
+
+  rotate(45);
+  ellipse(55, 0, dbod/3, 50);
+  ellipse(100, 0, dbod/3, 50);
+
+  rotate(-45);
+  fillIn(yell);
+  ellipse(70, 40, dhead, dhead);
+
 }
 
 
 function my_symbol() {
-  kermi();
+  ducky();
 }
