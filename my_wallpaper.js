@@ -1,9 +1,6 @@
 //your parameter variables go here!
 
-let mover = 0; //rotate (degrees)
-let movex = 0; //move on x
-let movey = 0; //move on y
-let moves = 1; //scale - default 1
+
 
 //colour variables
 let green;
@@ -15,6 +12,7 @@ let yellow;
 let dark_yellow;
 let orange;
 let dark_orange;
+let dark_blue;
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER);
@@ -38,13 +36,11 @@ function setup_wallpaper(pWallpaper) {
   dark_yellow = color(230, 210, 100);
   orange = color(255, 180, 100);
   dark_orange = color(235, 160, 85);
-
+  dark_blue = color(32, 165, 186);
 }
 
 function wallpaper_background() {
-  //background(240, 255, 240); //light honeydew green colour
-  //background(150, 150, 225); //bluey purple thing
-  background(46, 227, 255);
+  background(46, 227, 255); //light blue
 }
 
 function fillIn(colour) {
@@ -52,58 +48,11 @@ function fillIn(colour) {
   stroke(colour);
 }
 
-function kermi() {
-  let smol = 25;
-
-  fillIn(green);  
-  rect(70, 170, 20, 30); //leg l
-  rect(110, 170, 20, 30); //leg r
-  rect(0, 120, 200, 20); //arm
-
-  fillIn(dark_green);
-  ellipse(100, 153, 80, 90);//body shadow
-
-  fillIn(green);
-  ellipse(100, 150, 80, 90); //body
-
-  fillIn(dark_green);
-  ellipse(100, 113, 60, 40) //neck shadow
-
-  triangle(70, 110, 90, 130, 80, 145); //tri l
-  triangle(85, 120, 110, 130, 100, 150); //tri m
-  triangle(100, 120, 130, 110, 120, 145); //tri r
-
-  fillIn(greem);
-  ellipse(100, 95, 70, 70); //head
-
-  ellipse(70, 95, smol, smol); //cheek l
-  ellipse(130, 95, smol, smol); //cheek r
-  ellipse(85, 70, smol, smol); //eye l
-  ellipse(115, 70, smol, smol); //eye r
-
-  fillIn(red);
-  arc(100, 100, 50, 40, PI, 0); //smile
-
-  fillIn(green);
-  triangle(70, 100, 130, 100, 100, 105); //up lip
-
-  fillIn(white);
-  arc(85, 75, 20, 25, PI, 0); //eyeball l
-  arc(115, 75, 20, 25, PI, 0); //eyeball r
-
-  fillIn(black);
-  ellipse(85, 72, 6, 6); //pupil l
-  ellipse(115, 72, 6, 6); //pupil r
-  line(77, 73, 94, 71); //eyestick l
-  line(107, 71, 124, 73); //eyestick r
-}
-
+let dhead = 40;
+let dbod = 60;
+let eyew = 8;
+let eyeh = 3;
 function ducky() {
-  let dhead = 40;
-  let dbod = 60;
-  let eyew = 8;
-  let eyeh = 3;
-
   rotate(45); //wings on angle - 45 degree
   fillIn(dark_yellow);  
   ellipse(55.5, 0, dbod/3, 50); //left wing shadow
@@ -144,23 +93,61 @@ function ducky() {
   rotate(-15); //reset angle - 0 degree
 }
 
+let lilylocx = 130; //lilypad x coord
+let lilylocy = 130; //lilypad y coord
+let lilysize = 80; //param //lilypad size
+let lilysplit = 120; //param //lilypad split location (degrees)
 function lily() {
-  let lilysize = 80; //param
-  let lilysplit = 0; //param
+
+  fillIn(dark_blue);
+  arc(lilylocx, lilylocy+5, lilysize, lilysize, lilysplit, lilysplit-25); //water shadow
 
   fillIn(dark_green);
-  arc(130, 130, lilysize, lilysize, lilysplit, lilysplit-25);
+  arc(lilylocx, lilylocy, lilysize, lilysize, lilysplit, lilysplit-25); //lilypad shadow
 
   fillIn(green);
-  arc(130, 130, lilysize-7, lilysize-7, lilysplit+7, lilysplit-32);
+  arc(lilylocx, lilylocy, lilysize-7, lilysize-7, lilysplit+7, lilysplit-32); //lilypad light
 }
 
+function duckyshad() {
+  rotate(45);
+  fillIn(dark_blue);
+  ellipse(80, 1, dbod+10, dbod+20); //water shadow
+  rotate(-45);
+}
+
+
+let duckynum = 1; //number of ducks
+let duckyrot = 80; //rotate duck (degrees)
+let duckyx = 0; //move duck on x
+let duckyy = 0; //move duck on y
+let duckys = 1; //scale duck - default 1
+
+let lilynum = 2; //number of lilypads
+let lilyrot = 120; //rotate lilypad
+let lilyx = 0; //move lilypad on x
+let lilyy = 0; //move lilypad on y
+let lilys = 0.7; //scale lilypad - default 1
+
 function my_symbol() {
-  push();
-  rotate(mover);
-  translate(movex, movey, 0);
-  scale(moves, moves, moves);
-  ducky();
-  lily()
-  pop();
+  for (let i = 0; i < duckynum; i += 1) {
+    push();
+    rotate(duckyrot);
+    translate(duckyx, duckyy, 0);
+    scale(duckys);
+    duckyshad();
+    ducky();
+    pop();
+  }
+  
+  lily();
+  for (let i = 0; i < lilynum; i += 1) {
+    push();
+    rotate(lilyrot);
+    translate(lilyx, lilyy, 0);
+    scale(lilys);
+    lily();
+    pop();
+  }
+  
 }
