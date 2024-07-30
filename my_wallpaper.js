@@ -27,7 +27,7 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.grid_settings.row_offset  = 100;
 
   //Defining colours
-  green = color(110, 250, 130);
+  green = color(110, 230, 130);
   dark_green = color(100, 200, 130);
   red = color(255, 0, 21);
   white = color(250);
@@ -109,19 +109,59 @@ function lily() {
   arc(lilylocx, lilylocy, lilysize-7, lilysize-7, lilysplit+7, lilysplit-32); //lilypad light
 }
 
-function duckyshad() {
-  rotate(45);
-  fillIn(dark_blue);
-  ellipse(80, 1, dbod+10, dbod+20); //water shadow
-  rotate(-45);
-}
-
-
 let duckynum = 1; //number of ducks
-let duckyrot = 80; //rotate duck (degrees)
+let duckyrot = 220; //rotate duck (degrees)
 let duckyx = 0; //move duck on x
 let duckyy = 0; //move duck on y
 let duckys = 1; //scale duck - default 1
+
+function duckyshad() { 
+  //making shadow stay on the bottom left of the duck
+  //this is probably overcomplicated as hell for what its supposed to do
+  if (duckyrot >= 0 && duckyrot < 45) {
+    push();
+    rotate(45);
+    fillIn(dark_blue);
+    ellipse(85, 2, dbod+dbod/10, dbod+dbod/3); //water shadow
+    pop();
+  }
+  else if (duckyrot >= 45 && duckyrot < 90) {
+    push();
+    rotate(45);
+    fillIn(dark_blue);
+    ellipse(85, -2, dbod+dbod/10, dbod+dbod/3); //water shadow
+    pop();
+  }
+  else if (duckyrot >= 90 && duckyrot < 135) {
+    push();
+    rotate(45);
+    fillIn(dark_blue);
+    ellipse(85, -7, dbod+dbod/10, dbod+dbod/3); //water shadow
+    pop();
+  }
+  else if (duckyrot >= 135 && duckyrot < 180) {
+    push();
+    rotate(45);
+    fillIn(dark_blue);
+    ellipse(85, -12, dbod+dbod/10, dbod+dbod/3); //water shadow
+    pop();
+  }
+  else if (duckyrot >= 180 && duckyrot < 225) {
+    push();
+    rotate(45);
+    fillIn(dark_blue);
+    ellipse(75, -17, dbod+dbod/10, dbod+dbod/3); //water shadow
+    pop();
+  }
+  else if (duckyrot >= 225 && duckyrot < 270) {
+    push();
+    rotate(45);
+    fillIn(dark_blue);
+    ellipse(75, -17, dbod+dbod/10, dbod+dbod/3); //water shadow
+    pop();
+  }
+}
+
 
 let lilynum = 2; //number of lilypads
 let lilyrot = 120; //rotate lilypad
