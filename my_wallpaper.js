@@ -3,7 +3,7 @@
 let mover = 0; //rotate (degrees)
 let movex = 0; //move on x
 let movey = 0; //move on y
-let moves = 2.5; //scale - default 1
+let moves = 1; //scale - default 1
 
 //colour variables
 let green;
@@ -16,16 +16,12 @@ let dark_yellow;
 let orange;
 let dark_orange;
 
-let positions = [];
-let rotations = [];
-let scales = [];
-
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER);
   //DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
   pWallpaper.resolution(FIT_TO_SCREEN);
   //FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3, 
-  pWallpaper.show_guide(false); //set this to false when you're ready to print
+  pWallpaper.show_guide(true); //set this to false when you're ready to print
 
   //Grid settings
   pWallpaper.grid_settings.cell_width  = 200;
@@ -33,11 +29,11 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.grid_settings.row_offset  = 100;
 
   //Defining colours
-  green = color(20, 250, 20);
-  dark_green = color(20, 200, 20);
+  green = color(110, 250, 130);
+  dark_green = color(100, 200, 130);
   red = color(255, 0, 21);
-  white = color(255, 255, 255);
-  black = color(0,0,0);
+  white = color(250);
+  black = color(80);
   yellow = color(255, 235, 120);
   dark_yellow = color(230, 210, 100);
   orange = color(255, 180, 100);
@@ -149,12 +145,22 @@ function ducky() {
 }
 
 function lily() {
+  let lilysize = 80; //param
+  let lilysplit = 0; //param
 
+  fillIn(dark_green);
+  arc(130, 130, lilysize, lilysize, lilysplit, lilysplit-25);
+
+  fillIn(green);
+  arc(130, 130, lilysize-7, lilysize-7, lilysplit+7, lilysplit-32);
 }
 
 function my_symbol() {
+  push();
   rotate(mover);
   translate(movex, movey, 0);
   scale(moves, moves, moves);
   ducky();
+  lily()
+  pop();
 }
