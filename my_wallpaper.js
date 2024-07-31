@@ -29,8 +29,6 @@ function setup_wallpaper(pWallpaper) {
   //Defining colours
   green = color(110, 230, 130);
   dark_green = color(100, 200, 130);
-  red = color(255, 0, 21);
-  white = color(250);
   black = color(80);
   yellow = color(255, 235, 120);
   dark_yellow = color(230, 210, 100);
@@ -93,12 +91,11 @@ function ducky() {
   rotate(-15); //reset angle - 0 degree
 }
 
-let lilylocx = 100; //lilypad x coord
+let lilylocx = 150; //lilypad x coord
 let lilylocy = 130; //lilypad y coord
 let lilysize = 80; //param //lilypad size
 let lilysplit = 120; //param //lilypad split location (degrees)
 function lily() {
-
   fillIn(dark_blue);
   arc(lilylocx, lilylocy+5, lilysize, lilysize, lilysplit, lilysplit-25); //water shadow
 
@@ -111,69 +108,19 @@ function lily() {
 
 let duckynum = 1; //number of ducks
 let duckyrot = 70; //rotate duck (0 - 360 degrees)
-let duckyx = 0; //move duck on x
+let duckyx = 100; //move duck on x
 let duckyy = 0; //move duck on y
 let duckys = 1; //scale duck - default 1
 
 function duckyshad() { 
-  //making shadow stay on the bottomish of the duck
-  //this is probably overcomplicated as hell for what its supposed to do
-  if (duckyrot >= 0 && duckyrot < 45) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(85, 2, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
-  else if (duckyrot >= 45 && duckyrot < 90) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(85, -10, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
-  else if (duckyrot >= 90 && duckyrot < 135) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(85, -7, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
-  else if (duckyrot >= 135 && duckyrot < 180) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(85, -12, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
-  else if (duckyrot >= 180 && duckyrot < 225) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(75, -17, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
-  else if (duckyrot >= 225 && duckyrot < 270) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(70, -8, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
-  else if (duckyrot >= 270 && duckyrot < 315) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(70, -2, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
-  else if (duckyrot >= 315 && duckyrot <= 360) {
-    push();
-    rotate(45);
-    fillIn(dark_blue);
-    ellipse(85, 5, dbod+dbod/10, dbod+dbod/3); //water shadow
-    pop();
-  }
+  rotate(45);
+  fillIn(dark_blue);
+  ellipse(82, 0, dbod+dbod/10, dbod+dbod/3); //water shadow
+  rotate(-45);
+  push();
+  rotate(duckyrot);
+  translate(duckyx, duckyy, 0);
+  pop();
 }
 
 let lilynum = 5; //number of lilypads
@@ -186,9 +133,20 @@ function lilyshad() {
 
 }
 
+var orbitCenterX = 100;
+var orbitCenterY = 100;
+var orbitRadius = 50;
+var angle = 45;
 
 function my_symbol() {
-  for (let i = 0; i < duckynum; i += 1) {
+
+  var x = orbitCenterX + orbitRadius * cos(angle);
+  var y = orbitCenterY + orbitRadius * sin(angle);
+  
+  ellipse(orbitCenterX, orbitCenterY, 50, 50);
+  ellipse(x, y, 10, 10);
+
+  /* for (let i = 0; i < duckynum; i += 1) {
     push();
     rotate(duckyrot);
     translate(duckyx, duckyy, 0);
@@ -196,9 +154,8 @@ function my_symbol() {
     duckyshad();
     ducky();
     pop();
-  }
+  } */
   
-  lily();
   
  /* for (let i = 0; i < lilynum; i += 1) {
     push();
