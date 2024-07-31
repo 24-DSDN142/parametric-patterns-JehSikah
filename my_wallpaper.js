@@ -1,21 +1,22 @@
 //your parameter variables go here!
 let palette = 1;
 
+//duck alter parameters
 let rot_ducky = 0; //rotate ducky (0-360)
 let x_ducky = 60; //move ducky on x axis
 let y_ducky = 60; //move ducky on y axis
 let scal_ducky = 1; //scale ducky
 
+//lilypad alter parameters
 let rot_lily = 0; //rotate lilypad (0-360)
 let x_lily = 160; //move lilypad on x axis
 let y_lily = 160; //move lilypad on y axis
 let scal_lily = 1; //scale lilypad
 
-
-let dbod = 60; //ducky body size
-let lilysize = 80; //lilypad size
-let lilysplit = 100; //lilypad split location (0-360)
-
+//variables used throughout multiple functions
+var dbod = 60; //ducky body size
+var lilysize = 80; //lilypad size
+var lilysplit = 80; //lilypad split location (0-360)
 
 //colour variables
 let green;
@@ -31,7 +32,7 @@ let white;
 let grey;
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   //DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
   pWallpaper.resolution(FIT_TO_SCREEN);
   //FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
@@ -66,6 +67,8 @@ function setup_wallpaper(pWallpaper) {
     water_shad = dark_blue;
     lily_main = green;
     lily_shad = dark_green;
+    dbab_main = white;
+    dbab_shad = grey;
   }
 
 }
@@ -121,15 +124,21 @@ function ducky() {
   pop();
 }
 
-function shad(x, y, thing, scale) {
+function duckyling() {
+  
+  ducky();
 
-  let shad_dist = 7.5 * scale; //distance of shadows
+}
+
+function shad(x, y, thing) {
+  let shad_dist = 7.5; //distance of shadows
   let shad_ang = 70; //angle of shadows
 
   //ew math
   var x_shad = x + shad_dist * cos(shad_ang);
   var y_shad = y + shad_dist * sin(shad_ang);
 
+  //draw shadow depending on object casting it
   push(); 
   fillIn(water_shad);
 
@@ -150,23 +159,32 @@ function lilyp() {
   arc(0, 0, lilysize - 7, lilysize - 7, lilysplit + 7, lilysplit - 32); //lilypad
 }
 
-let ducky_num = 3;
-
 function my_symbol() {
+  
+  push();
+  scale(scal_ducky);
+  shad(x_ducky, y_ducky, "duck"); //figure how to rotate on spot
+  pop();
+  
+  push();
+  translate(x_ducky, y_ducky, 0);
+  rotate(rot_ducky);
+  scale(scal_ducky);
+  ducky();
+  pop();
 
+  push();
+  translate(x_ducky, y_ducky + 80, 0);
+  rotate(rot_ducky - 20);
+  scale(scal_ducky - 0.4);
+  duckyling();
+  pop();
   
-  for (i = 0; i < ducky_num; i += 1) {
-    push();
-    translate(x_ducky, y_ducky, 0);
-    rotate(rot_ducky);
-    scale(scal_ducky);
-    shad(x_ducky, y_ducky, "duck", scal_ducky); //figure how to rotate on spot
-    ducky();
-    pop();
-  }
-  
-  shad(x_lily, y_lily, "lily", scal_lily); //figure how to rotate on spot
-  
+  push();
+  scale(scal_lily);
+  shad(x_lily, y_lily, "lily"); //figure how to rotate on spot
+  pop();
+
   push();
   scale(scal_lily);
   translate(x_lily, y_lily, 0);
@@ -175,6 +193,5 @@ function my_symbol() {
   pop();
   
   rot_ducky += 45;
-  rot_lily += 45;
-  
+  rot_lily += 45;  
 }
