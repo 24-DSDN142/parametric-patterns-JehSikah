@@ -1,11 +1,12 @@
 //your parameter variables go here!
-let palette = 2;
+let palette = 1;
 let ducky_fit = 1;
 let duckle_fit = 2;
 
-let ducky_num = 1; //set number of duckys
+let ducky_num = 2; //set number of duckys
 let duckle_num = 2; //set number of duckles
 let lily_num = 3; //set number of lilypads
+
 //duck alter parameters
 let rot_ducky = 0; //rotate ducky (0-360)
 let x_ducky = 60; //move ducky on x axis
@@ -86,7 +87,7 @@ function setup_wallpaper(pWallpaper) {
   //Defining colours
   //Palette 1 - day
   blue = color(46, 227, 255);
-  dark_blue = color(32, 165, 186);
+  dark_blue = color(32, 165, 186, 80);
   green = color(110, 230, 130);
   dark_green = color(100, 200, 130);
 
@@ -103,7 +104,7 @@ function setup_wallpaper(pWallpaper) {
 
   //Palette 2 - night
   n_blue = color(19, 83, 194);
-  n_dark_blue = color(14, 61, 141);
+  n_dark_blue = color(14, 61, 141, 80);
   n_green = color(45, 84, 99);
   n_dark_green = color(41, 73, 99);
   
@@ -117,7 +118,7 @@ function setup_wallpaper(pWallpaper) {
 
   //Palette 3 - mexico
   m_blue = color(46, 159, 95);
-  m_dark_blue = color(32, 97, 28);
+  m_dark_blue = color(32, 97, 28, 80);
   m_green = color(110, 162, 19);
   m_dark_green = color(100, 132, 19);
 
@@ -307,9 +308,24 @@ function shad(thing) {
   pop();
 }
 
+var wave_diam = 30;
+var wave_mid = 10;
+var wave_ang = 0;
+var wave_weight = 10;
+function wave() {
+  var angle = 45;
+
+  push();
+  noFill();
+  strokeWeight(wave_weight);
+  stroke(water_shad);
+  arc(wave_mid, wave_mid, wave_diam, wave_diam, angle, angle + 180);
+  arc(wave_mid+wave_diam*sin(angle), wave_mid+wave_diam*cos(angle), wave_diam, wave_diam, angle + 180, angle);
+  pop();
+}
+
 function quadrants() {
   let quad_pick = int(random(0,4));
-
   text(quad_pick, 150, 150);
 
   if (quad_pick == 0) {
@@ -328,29 +344,40 @@ function quadrants() {
 }
 
 function my_symbol() {
+  push();
+  rotate(wave_ang);
+  for (let i = 0; i < 9.5; i++) {
+    wave();
+    translate(wave_diam * 1.5 - wave_weight / 2, wave_diam * 1.5 - wave_weight / 2, 0);
+  }
+  pop();
+}
+  /*
   quadrants();
+  push();
+  //translate(x_quad, y_quad, 0);
 
-  for (let i = 0; i < ducky_num; i++) {
-    //ducky shadow translation
+  for (let i = 0; i < lily_num; i++) {
+    //lilypad shadow translation
     push();
-    translate(x_ducky + offset, y_ducky + offset, 0);
-    rotate(rot_ducky);
-    scale(scal_ducky);
-    shad("duck");
+    translate(x_lily + offset, y_lily + offset, 0);
+    rotate(rot_lily);
+    scale(scal_lily);
+    shad("lily"); //figure how to rotate on spot
     pop();
 
-    //ducky translation
+    //lilypad translation
     push();
-    translate(x_ducky, y_ducky, 0);
-    rotate(rot_ducky);
-    scale(scal_ducky);
-    ducky();
+    translate(x_lily, y_lily, 0);
+    rotate(rot_lily);
+    scale(scal_lily);
+    lilyp();
     pop();
 
-    x_ducky = random(10, 100);
-    y_ducky = random(40, 150);
-    rot_ducky += random(10, 40);
-    scal_ducky = random(0.8, 1.1);
+    x_lily = random(70, 200);
+    y_lily = random(70, 200);
+    rot_lily += random(10, 100);
+    scal_lily = random(0.4, 1);
   }
 
   for (let i = 0; i < duckle_num; i++) {
@@ -373,31 +400,33 @@ function my_symbol() {
     x_duckle = random(10, 150);
     y_duckle = random(40, 150);
     rot_duckle += random(10, 40);
-    scal_duckle = random(0.4, 1);
+    scal_duckle = random(0.3, 0.9);
   }
 
-  for (let i = 0; i < lily_num; i++) {
-    //lilypad shadow translation
+  for (let i = 0; i < ducky_num; i++) {
+    //ducky shadow translation
     push();
-    translate(x_lily + offset, y_lily + offset, 0);
-    rotate(rot_lily);
-    scale(scal_lily);
-    shad("lily"); //figure how to rotate on spot
+    translate(x_ducky + offset, y_ducky + offset, 0);
+    rotate(rot_ducky);
+    scale(scal_ducky);
+    shad("duck");
     pop();
 
-    //lilypad translation
+    //ducky translation
     push();
-    translate(x_lily, y_lily, 0);
-    rotate(rot_lily);
-    scale(scal_lily);
-    lilyp();
+    translate(x_ducky, y_ducky, 0);
+    rotate(rot_ducky);
+    scale(scal_ducky);
+    ducky();
     pop();
 
-    x_lily += random(10, 30);
-    y_lily += random(10, 30);
-    rot_lily += random(10, 100);
-    scal_lily = random(0.4, 1);
+    x_ducky = random(10, 100);
+    y_ducky = random(40, 150);
+    rot_ducky += random(10, 40);
+    scal_ducky = random(0.7, 1.1);
   }
+
+  pop();
 
   rot_ducky += 45;
   if(rot_ducky == 360){
@@ -407,4 +436,4 @@ function my_symbol() {
   }
   rot_lily += 45;  
   text(rot_ducky, 50, 50);
-}
+} */
