@@ -9,7 +9,7 @@ let duckle_fit = 2;
 let quad_rand = 0;
 
 //duck alter parameters
-let ducky_num = 2; //set number of duckys
+let ducky_num = 1; //set number of duckys
 let rot_ducky = 0; //rotate ducky (0-360)
 let x_ducky = 60; //move ducky on x axis
 let y_ducky = 60; //move ducky on y axis
@@ -355,12 +355,6 @@ let ducky_lay = 1;
 let lily_lay = 1;
 
 function my_symbol() {
-  let x1_ducky = 0; //move ducky on x axis
-  let y1_ducky = 0; //move ducky on y axis
-  let x1_duckle = 0; //move ducky on x axis
-  let y1_duckle = 0; //move ducky on y axis
-  let x1_lily = 0; //move ducky on x axis
-  let y1_lily = 0; //move ducky on y axis
 
   //background waves section
   push();
@@ -376,19 +370,18 @@ function my_symbol() {
 
   //lilypad section
   for (let i = 0; i < lily_num; i++) {
-    let scal1_lily = 0.2*i; //scale lily dupes
 
     //lilypad shadow translation
     push();
-    translate(x_lily + x1_lily + shad_off, y_lily + y1_lily + shad_off, 0);
+    translate(x_lily + shad_off, y_lily + shad_off, 0);
     rotate(rot_lily);
-    scale(scal_lily*scal1_lily);
+    scale(scal_lily);
     shad("lily");
     pop();
 
     //lilypad translation
     push();
-    translate(x_lily + x1_lily, y_lily + y1_lily, 0);
+    translate(x_lily, y_lily, 0);
     rotate(rot_lily);
     scale(scal_lily);
     lilyp();
@@ -400,33 +393,27 @@ function my_symbol() {
       x_lily = random(0 + lilysize*scal_lily, 200 - lilysize*scal_lily);
       y_lily = random(0 + lilysize*scal_lily, 200 - lilysize*scal_lily);
     } else if (lily_rand == false) {
-      // x1_lily = lilysize*i;
-      // y1_lily = lilysize*i;
-      // rot_lily += 30;
-
-      //lily gradient
-      // x_lily = lilysize*i;
-      // y_lily = lilysize*i;
-      // rot_lily += 30;
-      // scal_lily -= i/50;
+      x_lily = lilysize*i;
+      y_lily = lilysize*i;
+      rot_lily += 30;
+      scal_lily -= i/50;
     }  
   }
 
   //duckle section
   for (let i = 0; i < duckle_num; i++) {
-    let scal1_duckle = 0.2*i; //scale duckle dupes
 
     //duckle shadow translation
     push();
-    translate(x_duckle + x1_duckle + shad_off, y_duckle + y1_duckle + shad_off, 0);
+    translate(x_duckle + shad_off, y_duckle + shad_off, 0);
     rotate(rot_duckle);
-    scale(scal_duckle-scal1_duckle);
+    scale(scal_duckle);
     shad("duck");
     pop();
 
     //duckle translation
     push();
-    translate(x_duckle + x1_duckle, y_duckle + y1_duckle, 0);
+    translate(x_duckle, y_duckle, 0);
     rotate(rot_duckle);
     scale(scal_duckle);
     duckle();
@@ -438,29 +425,26 @@ function my_symbol() {
       rot_duckle += random(10, 40);
       scal_duckle = random(0.3, 0.9);
     } else if (duckle_rand == false) {
-      // x1_duckle = dbod*1.1*i;
-      // y1_duckle = dbod*1.1*i;
       // rot_duckle += 30;
     }
   }
 
   //ducky section
   for (let i = 0; i < ducky_num; i++) {
-    let scal1_ducky = 0.2*i; //scale ducky dupes
     
     //ducky shadow translation
     push();
-    translate(x_ducky + x1_ducky + shad_off, y_ducky + y1_ducky + shad_off, 0);
+    translate(x_ducky + shad_off, y_ducky + shad_off, 0);
     rotate(rot_ducky);
-    scale(scal_ducky-scal1_ducky);
+    scale(scal_ducky);
     shad("duck");
     pop();
 
     //ducky translation
     push();
-    translate(x_ducky + x1_ducky, y_ducky + y1_ducky, 0);
+    translate(x_ducky, y_ducky, 0);
     rotate(rot_ducky);
-    scale(scal_ducky-scal1_ducky);
+    scale(scal_ducky);
     ducky();
     pop();
     
@@ -471,15 +455,17 @@ function my_symbol() {
       scal_ducky = random(0.7, 1.1);
     } else if (ducky_rand == false) {
       if (ducky_lay == 1) {
-        x1_ducky = dbod*1.1*i;
-        // y1_ducky = dbod*1.1*i;
-        // rot_ducky -= 40;
-      }
+        if (i == 1) {
+          x_ducky = dbod; 
+          //y_ducky
+          //rot_ducky
 
+        }
+      }
     } 
   }
 
-  //rot_ducky += 45;
-  //rot_lily += 45;
+  rot_ducky += 45;
+  rot_lily += 45;
   
 }
