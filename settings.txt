@@ -10,45 +10,531 @@ Your final settings.txt will look something like this when you are finished:
 Wallpaper 1:
 
 //your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 20;
-let paramter1 = 10;
-let paramter2 = true;
-let paramter3 = 50; 
-let paramter4 = 0; 
-let paramter5 = 60;
+let palette = 1;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 3;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
 
-function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(NINE_LANDSCAPE);
-  pWallpaper.show_guide(false); //set this to false when you're ready to print
+//wave alter parameters
+let wave_flip = false; //change direction of waves
+let wave_weight = 5; //wave thickness
 
-  //Grid settings
-  pWallpaper.grid_settings.cell_width  = 100;
-  pWallpaper.grid_settings.cell_height = 100;
-  pWallpaper.grid_settings.row_offset  = 50;
-}
+//duck alter parameters
+let ducky_num = 2; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 45; //rotate ducky group (0-360)
+let rot_ducky = 200; //rotate ducky (0-360)
+let x_ducky = -25; //move ducky on x axis
+let y_ducky = 85; //move ducky on y axis
+let scal_ducky = 1; //scale ducky
+let deg_d = 0; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 0; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 0; //rotate duckle group (0-360)
+let rot_duckle = 180; //rotate duckle (0-360)
+let x_duckle = 63; //move duckle on x axis
+let y_duckle = 50; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 0; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 5; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = 160; //move lilypad on x axis
+let y_lily = 160; //move lilypad on y axis
+let scal_lily = 1; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 200;
+pWallpaper.grid_settings.cell_height = 200;
+pWallpaper.grid_settings.row_offset  = 0;
 
 /////////////////////////////////
 
 Wallpaper 2:
 
 //your parameter variables go here!
-let rect_width  = 10;
-let rect_height = 10;
-let paramter1 = 20;
-let paramter2 = false;
-let paramter3 = 50; 
-let paramter4 = 80; 
-let paramter5 = 30;
+let palette = 2;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 1;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
 
-function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(NINE_LANDSCAPE);
-  pWallpaper.show_guide(false); //set this to false when you're ready to print
+//wave alter parameters
+let wave_flip = true; //change direction of waves
+let wave_weight = 3; //wave thickness
 
-  //Grid settings
-  pWallpaper.grid_settings.cell_width  = 100;
-  pWallpaper.grid_settings.cell_height = 100;
-  pWallpaper.grid_settings.row_offset  = 0;
-}
+//duck alter parameters
+let ducky_num = 1; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 0; //rotate ducky group (0-360)
+let rot_ducky = -140; //rotate ducky (0-360)
+let x_ducky = 110; //move ducky on x axis
+let y_ducky = 30; //move ducky on y axis
+let scal_ducky = 1; //scale ducky
+let deg_d = 0; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 2; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 160; //rotate duckle group (0-360)
+let rot_duckle = 180; //rotate duckle (0-360)
+let x_duckle = -240; //move duckle on x axis
+let y_duckle = 155; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 0; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 3; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = -135; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = -30; //move lilypad on x axis
+let y_lily = 130; //move lilypad on y axis
+let scal_lily = 1; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 150;
+pWallpaper.grid_settings.cell_height = 150;
+pWallpaper.grid_settings.row_offset  = 75;
+
+/////////////////////////////////
+
+Wallpaper 3:
+
+//your parameter variables go here!
+let palette = 3;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 1;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+
+//wave alter parameters
+let wave_flip = false; //change direction of waves
+let wave_weight = 20; //wave thickness
+
+//duck alter parameters
+let ducky_num = 3; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 90; //rotate ducky group (0-360)
+let rot_ducky = 0; //rotate ducky (0-360)
+let x_ducky = 0; //move ducky on x axis
+let y_ducky = 0; //move ducky on y axis
+let scal_ducky = 1; //scale ducky
+let deg_d = 0; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 2; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 90; //rotate duckle group (0-360)
+let rot_duckle = 70; //rotate duckle (0-360)
+let x_duckle = 80; //move duckle on x axis
+let y_duckle = 150; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 0; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 0; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 200;
+pWallpaper.grid_settings.cell_height = 200;
+pWallpaper.grid_settings.row_offset  = 65;
+  
+/////////////////////////////////
+
+Wallpaper 4:
+
+//your parameter variables go here!
+let palette = 1;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 1;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+
+//wave alter parameters
+let wave_flip = true; //change direction of waves
+let wave_weight = 8; //wave thickness
+
+//duck alter parameters
+let ducky_num = 1; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 0; //rotate ducky group (0-360)
+let rot_ducky = 0; //rotate ducky (0-360)
+let x_ducky = 0; //move ducky on x axis
+let y_ducky = 0; //move ducky on y axis
+let scal_ducky = 2; //scale ducky
+let deg_d = 20; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 1; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 0; //rotate duckle group (0-360)
+let rot_duckle = 0; //rotate duckle (0-360)
+let x_duckle = 0; //move duckle on x axis
+let y_duckle = 0; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 20; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 1; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2.5; //scale lilypad
+let deg_l = 20; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 200;
+pWallpaper.grid_settings.cell_height = 200;
+pWallpaper.grid_settings.row_offset  = 75;
+
+/////////////////////////////////
+
+Wallpaper 5:
+
+//your parameter variables go here!
+let palette = 3;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 1;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+
+//wave alter parameters
+let wave_flip = false; //change direction of waves
+let wave_weight = 8; //wave thickness
+
+//duck alter parameters
+let ducky_num = 3; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 10; //rotate ducky group (0-360)
+let rot_ducky = 0; //rotate ducky (0-360)
+let x_ducky = -40; //move ducky on x axis
+let y_ducky = -40; //move ducky on y axis
+let scal_ducky = 0.9; //scale ducky
+let deg_d = 10; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 0; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 0; //rotate duckle group (0-360)
+let rot_duckle = 0; //rotate duckle (0-360)
+let x_duckle = 100; //move duckle on x axis
+let y_duckle = 100; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 0; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 2; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2.5; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = true; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 200;
+pWallpaper.grid_settings.cell_height = 200;
+pWallpaper.grid_settings.row_offset  = 75;
+
+/////////////////////////////////
+
+Wallpaper 6:
+
+//your parameter variables go here!
+let palette = 1;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 1;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+
+//wave alter parameters
+let wave_flip = true; //change direction of waves
+let wave_weight = 8; //wave thickness
+
+//duck alter parameters
+let ducky_num = 0; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 0; //rotate ducky group (0-360)
+let rot_ducky = 0; //rotate ducky (0-360)
+let x_ducky = 0; //move ducky on x axis
+let y_ducky = 0; //move ducky on y axis
+let scal_ducky = 2; //scale ducky
+let deg_d = 20; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 1; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 0; //rotate duckle group (0-360)
+let rot_duckle = 0; //rotate duckle (0-360)
+let x_duckle = 100; //move duckle on x axis
+let y_duckle = 100; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 20; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 3; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2.5; //scale lilypad
+let deg_l = 20; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = true; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 200;
+pWallpaper.grid_settings.cell_height = 200;
+pWallpaper.grid_settings.row_offset  = 75;
+
+/////////////////////////////////
+
+Wallpaper 7:
+
+//your parameter variables go here!
+let palette = 1;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 1;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+
+//wave alter parameters
+let wave_flip = false; //change direction of waves
+let wave_weight = 8; //wave thickness
+
+//duck alter parameters
+let ducky_num = 0; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 0; //rotate ducky group (0-360)
+let rot_ducky = 0; //rotate ducky (0-360)
+let x_ducky = 0; //move ducky on x axis
+let y_ducky = 0; //move ducky on y axis
+let scal_ducky = 2; //scale ducky
+let deg_d = 0; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 3; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 90; //rotate duckle group (0-360)
+let rot_duckle = 0; //rotate duckle (0-360)
+let x_duckle = 50; //move duckle on x axis
+let y_duckle = 50; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 1; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 0; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2.5; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 100;
+pWallpaper.grid_settings.cell_height = 100;
+pWallpaper.grid_settings.row_offset  = 37.5;
+
+/////////////////////////////////
+
+Wallpaper 8:
+
+//your parameter variables go here!
+let palette = 1;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 3;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+
+//wave alter parameters
+let wave_flip = false; //change direction of waves
+let wave_weight = 8; //wave thickness
+
+//duck alter parameters
+let ducky_num = 1; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 0; //rotate ducky group (0-360)
+let rot_ducky = -45; //rotate ducky (0-360)
+let x_ducky = 0; //move ducky on x axis
+let y_ducky = 0; //move ducky on y axis
+let scal_ducky = 2.5; //scale ducky
+let deg_d = 0; //rotate ducky per cell
+let ducky_rand = false; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 0; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 0; //rotate duckle group (0-360)
+let rot_duckle = 0; //rotate duckle (0-360)
+let x_duckle = 0; //move duckle on x axis
+let y_duckle = 0; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 1; //rotate duckle per cell
+let duckle_rand = false; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 0; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 0; //rotate lilypad (0-360)
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2.5; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GRID_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 200;
+pWallpaper.grid_settings.cell_height = 200;
+pWallpaper.grid_settings.row_offset  = 100;
+
+/////////////////////////////////
+
+Wallpaper 9:
+
+//your parameter variables go here!
+let palette = 2;
+//1:day, 2:night, 3:mexico
+let ducky_fit = 1;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+let duckle_fit = 2;
+//1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
+
+//wave alter parameters
+let wave_flip = false; //change direction of waves
+let wave_weight = 11; //wave thickness
+
+//duck alter parameters
+let ducky_num = 1; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 0; //rotate ducky group (0-360)
+let rot_ducky = 0; //rotate ducky (0-360)
+let x_ducky = 0; //move ducky on x axis
+let y_ducky = 0; //move ducky on y axis
+let scal_ducky = 2; //scale ducky
+let deg_d = 70; //rotate ducky per cell
+let ducky_rand = true; //allow randomisation (true/false)
+
+//duckle alter parameters
+let duckle_num = 2; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 0; //rotate duckle group (0-360)
+let rot_duckle = 0; //rotate duckle (0-360)
+let x_duckle = 100; //move duckle on x axis
+let y_duckle = 0; //move duckle on y axis
+let scal_duckle = 1; //scale duckle
+let deg_d2 = 45; //rotate duckle per cell
+let duckle_rand = true; //allow randomisation (true/false)
+
+//lilypad alter parameters
+let lily_num = 3; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let rot_l = 0; //rotate lily group (0-360)
+let rot_lily = 40; //rotate lilypad (0-360)
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
+let lily_rand = false; //allow randomisation (true/false)
+let lily_grad = true; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
+
+//set up function stuff
+pWallpaper.output_mode(GLIDE_WALLPAPER);
+//DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
+pWallpaper.resolution(NINE_LANDSCAPE);
+//FIT_TO_SCREEN, NINE_LANDSCAPE, NINE_PORTRAIT, A4, A3 (for favourite wallpaper)
+pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+//Grid settings
+pWallpaper.grid_settings.cell_width  = 200;
+pWallpaper.grid_settings.cell_height = 200;
+pWallpaper.grid_settings.row_offset  = 0;
+
+/////////////////////////////////

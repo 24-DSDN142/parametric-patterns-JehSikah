@@ -1,51 +1,55 @@
 //your parameter variables go here!
-let palette = 1;
+let palette = 3;
 //1:day, 2:night, 3:mexico
-let ducky_fit = 3;
+let ducky_fit = 1;
 //1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
 let duckle_fit = 2;
 //1:yellow, 2:white, 3:pink (only in palette 1, dlc available for $2.99)
 
+//wave alter parameters
+let wave_flip = false; //change direction of waves
+let wave_weight = 20; //wave thickness
+
 //duck alter parameters
-let ducky_num = 2; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
-let rot_d = 45; //rotate ducky group (0-360)
-let rot_ducky = 200; //rotate ducky (0-360)
-let x_ducky = -25; //move ducky on x axis
-let y_ducky = 85; //move ducky on y axis
+let ducky_num = 3; //set number of duckys (max 3 unless ducky_rand = true !gets messy!)
+let rot_d = 90; //rotate ducky group (0-360)
+let rot_ducky = 0; //rotate ducky (0-360)
+let x_ducky = 0; //move ducky on x axis
+let y_ducky = 0; //move ducky on y axis
 let scal_ducky = 1; //scale ducky
+let deg_d = 0; //rotate ducky per cell
 let ducky_rand = false; //allow randomisation (true/false)
 
 //duckle alter parameters
-let duckle_num = 0; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
-let rot_d2 = 0; //rotate duckle group (0-360)
-let rot_duckle = 180; //rotate duckle (0-360)
-let x_duckle = 63; //move duckle on x axis
-let y_duckle = 50; //move duckle on y axis
+let duckle_num = 2; //set number of duckles (max 5 unless duckle_rand = true !gets messy!)
+let rot_d2 = 90; //rotate duckle group (0-360)
+let rot_duckle = 70; //rotate duckle (0-360)
+let x_duckle = 80; //move duckle on x axis
+let y_duckle = 150; //move duckle on y axis
 let scal_duckle = 1; //scale duckle
+let deg_d2 = 0; //rotate duckle per cell
 let duckle_rand = false; //allow randomisation (true/false)
 
 //lilypad alter parameters
-let lily_num = 5; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
+let lily_num = 0; //set number of lilypads (max 5 unless lily_rand = true !gets messy!)
 let rot_l = 0; //rotate lily group (0-360)
 let rot_lily = 0; //rotate lilypad (0-360)
-let x_lily = 160; //move lilypad on x axis
-let y_lily = 160; //move lilypad on y axis
-let scal_lily = 1; //scale lilypad
+let x_lily = 0; //move lilypad on x axis
+let y_lily = 0; //move lilypad on y axis
+let scal_lily = 2; //scale lilypad
+let deg_l = 0; //rotate lilypad per cell
 let lily_rand = false; //allow randomisation (true/false)
-let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false)
-
-//variables used in multiple functions
-var dbod = 60; //ducky body size
-var lilysize = 80; //lilypad size
-var lilysplit = 80; //lilypad split location (0-360)
-var shad_off = 5; //shadow offset
-var x_quad = 0; //quadrant x coord
-var y_quad = 0; //quadrant y coord
-var wave_diam = 23.5; //wave size
-var wave_ang = 45; //make waves diagonal
-var wave_weight = 5; //wave thickness
+let lily_grad = false; //fullscreen lily gradient (only works if lily_rand = false && lily_num > 1)
 
 //!! DO NOT TOUCH PAST HERE!! (except for wallpaper output mode n such)
+//variables used in multiple functions
+let dbod = 60; //ducky body size
+let lilysize = 80; //lilypad size
+let lilysplit = 80; //lilypad split location (0-360)
+let shad_off = 5; //shadow offset
+let wave_diam = 23.5; //wave size
+let wave_ang = 45; //make waves diagonal
+
 //variables for duplicate objects
 let ducky1;
 let ducky2;
@@ -104,6 +108,7 @@ let m_white;
 let m_grey;
 
 function setup_wallpaper(pWallpaper) {
+  //set up function stuff
   pWallpaper.output_mode(GRID_WALLPAPER);
   //DEVELOP_GLYPH, GRID_WALLPAPER, GLIDE_WALLPAPER
   pWallpaper.resolution(NINE_LANDSCAPE);
@@ -113,10 +118,10 @@ function setup_wallpaper(pWallpaper) {
   //Grid settings
   pWallpaper.grid_settings.cell_width  = 200;
   pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset  = 0;
+  pWallpaper.grid_settings.row_offset  = 65;
 
-  //Defining colours
-  //Palette 1 - day
+  //defining colours
+  //palette 1 - day
   blue = color(46, 227, 255);
   dark_blue = color(32, 165, 186, 80);
   green = color(110, 230, 130);
@@ -133,7 +138,7 @@ function setup_wallpaper(pWallpaper) {
   pink = color(255, 190, 255);
   dark_pink = color(220, 160, 225);
 
-  //Palette 2 - night
+  //palette 2 - night
   n_blue = color(19, 83, 194);
   n_dark_blue = color(14, 61, 141, 80);
   n_green = color(45, 84, 99);
@@ -147,7 +152,7 @@ function setup_wallpaper(pWallpaper) {
   n_white = color(92, 92, 194);
   n_grey = color(76, 82, 170);
 
-  //Palette 3 - mexico
+  //palette 3 - mexico
   m_blue = color(46, 159, 95);
   m_dark_blue = color(32, 97, 28, 80);
   m_green = color(110, 162, 19);
@@ -161,8 +166,8 @@ function setup_wallpaper(pWallpaper) {
   m_white = color(222, 182, 95);
   m_grey = color(190, 153, 63);
 
-  //Changing colour palettes
-  //Environment palettes
+  //changing colour palettes
+  //environment palettes
   if (palette == 1) {
     water = blue;
     water_shad = dark_blue;
@@ -180,7 +185,7 @@ function setup_wallpaper(pWallpaper) {
     lily_shad = m_dark_green;
   }
 
-  //Ducky palettes
+  //ducky palettes
   if (palette == 1) {
     eyes = black;
     beak_main = orange;
@@ -256,16 +261,19 @@ function setup_wallpaper(pWallpaper) {
     }
   }
 
+  //ordered/predetermined ducks since I didn't figure how to place them properly on time
   ducky1 = new Ducky(x_ducky*scal_ducky, y_ducky*scal_ducky, rot_ducky, scal_ducky);
   ducky2 = new Ducky(x_ducky*scal_ducky - 30, y_ducky*scal_ducky + 75, rot_ducky - 45, scal_ducky - 0.15);
   ducky3 = new Ducky(x_ducky*scal_ducky + 80, y_ducky*scal_ducky + 40, rot_ducky + 90, scal_ducky + 0.2);
 
+  //ordered/predetermined duckles
   duckle1 = new Duckle(x_duckle*scal_duckle, y_duckle*scal_duckle, rot_duckle, scal_duckle);
   duckle2 = new Duckle(x_duckle*scal_duckle - 32, y_duckle*scal_duckle - 28, rot_duckle + 50, scal_duckle - 0.1);
   duckle3 = new Duckle(x_duckle*scal_duckle + 15, y_duckle*scal_duckle - 46, rot_duckle - 65, scal_duckle + 0.05);
   duckle4 = new Duckle(x_duckle*scal_duckle - 30, y_duckle*scal_duckle - 77, rot_duckle + 23, scal_duckle + 0.13);
   duckle5 = new Duckle(x_duckle*scal_duckle + 19, y_duckle*scal_duckle - 95, rot_duckle - 45, scal_duckle - 0.04);
 
+  //ordered/predetermined lilypads
   lily1 = new Lily(x_lily, y_lily, rot_lily, scal_lily);
   lily2 = new Lily(x_lily*scal_lily + 25, y_lily*scal_lily - 60, rot_lily + 150, scal_lily - 0.4);
   lily3 = new Lily(x_lily*scal_lily - 15, y_lily*scal_lily - 55, rot_lily - 90, scal_lily - 0.6);
@@ -274,18 +282,18 @@ function setup_wallpaper(pWallpaper) {
 }
 
 function wallpaper_background() {
-  background(water); //water colour
+  background(water); //sets canvas to water colour
 }
 
 function fillIn(colour) {
   fill(colour);
-  stroke(colour);
+  stroke(colour); //seamless outlines
 }
 
 function drawducky(body_main, body_shad) {
-  var dhead = 40;
-  var eyew = 8;
-  var eyeh = 3;
+  let dhead = 40;
+  let eyew = 8;
+  let eyeh = 3;
 
   fillIn(body_shad);
   ellipse(-22.5, 5, dbod / 3, 50); //left wing shadow
@@ -317,32 +325,35 @@ function drawducky(body_main, body_shad) {
 
   fillIn(eyes);
   push();
-  rotate(45);
-  ellipse(-28, -10, eyeh, eyew);
-  rotate(-90);
-  ellipse(28, -10, eyeh, eyew);
+  rotate(45); //eyes on angle
+  ellipse(-28, -10, eyeh, eyew); //left eye
+  rotate(-90); //eye on opposite angle
+  ellipse(28, -10, eyeh, eyew); //right eye
   pop();
 }
 
 function ducky(x, y, rot, scal) {
+  //ducky translation
   push();
   translate(x, y, 0);
   rotate(rot);
   scale(scal);
-  drawducky(dbod_main, dbod_shad);
+  drawducky(dbod_main, dbod_shad); //colour can be different to duckle
   pop();
 }
 
 function duckle(x, y, rot, scal) {
+  //duckle translation
   push();
   translate(x, y, 0);
   rotate(rot);
   scale(scal);
-  drawducky(dbab_main, dbab_shad);
+  drawducky(dbab_main, dbab_shad); //colour can be different to ducky
   pop();
 }
 
 function lilyp(x, y, rot, scal) {
+  //lilypad translation
   push();
   translate(x, y, 0);
   rotate(rot);
@@ -355,6 +366,7 @@ function lilyp(x, y, rot, scal) {
 }
 
 function shad(x, y, rot, scal, thing) {
+  //water shadow translation
   push(); 
   translate(x, y, 0);
   rotate(rot);
@@ -373,17 +385,18 @@ function shad(x, y, rot, scal, thing) {
 }
 
 function wave(x, y) {
-
+  //s wave shape for background
   push();
   noFill();
   strokeWeight(wave_weight);
   stroke(water_shad);
-  arc(x, y, wave_diam, wave_diam, wave_ang, wave_ang + 180);
-  arc(x+wave_diam*sin(wave_ang), y+wave_diam*cos(wave_ang), wave_diam, wave_diam, wave_ang + 180, wave_ang);
+  arc(x, y, wave_diam, wave_diam, wave_ang, wave_ang + 180); //semicircle
+  arc(x+wave_diam*sin(wave_ang), y+wave_diam*cos(wave_ang), wave_diam, wave_diam, wave_ang + 180, wave_ang); //opposite semicircle
   pop();
 }
 
 class Ducky {
+  //moves duped duckys relative to original ducky
   constructor(x, y, rot, scal) {
     this.x = x;
     this.y = y;
@@ -391,6 +404,7 @@ class Ducky {
     this.scal = scal;
   }
 
+  //draws duck with shadow
   show() {
     shad(this.x + shad_off, this.y + shad_off, this.rot, this.scal, "duck");
     ducky(this.x, this.y, this.rot, this.scal);
@@ -398,16 +412,19 @@ class Ducky {
 }
 
 class Duckle {
+  //moves duped duckles relative to original duckle
   constructor(x, y, rot, scal) {
     this.x = x;
     this.y = y;
     this.rot = rot;
     this.scal = scal-0.4;
+    //counteracts 0 and negative scaling
     if (this.scal <= 0) {
       this.scal = 0.1;
     }
   }
 
+  //draws duckle with shadow
   show() {
     shad(this.x + shad_off, this.y + shad_off, this.rot, this.scal, "duck");
     duckle(this.x, this.y, this.rot, this.scal);
@@ -415,6 +432,7 @@ class Duckle {
 }
 
 class Lily {
+  //moves duped lilypads relative to original lilypad
   constructor(x, y, rot, scal) {
     this.x = x;
     this.y = y;
@@ -422,6 +440,7 @@ class Lily {
     this.scal = scal;
   }
 
+  //draws lilypad with shadow
   show() {
     shad(this.x + shad_off, this.y + shad_off, this.rot, this.scal, "lily");
     lilyp(this.x, this.y, this.rot, this.scal);
@@ -430,128 +449,156 @@ class Lily {
 
 function my_symbol() {
   //background waves section
-    push();
-    for (let i = 0; i < 2; i++) {
-      for (let x_wave = wave_diam/2; x_wave <= 200; x_wave += 100 - wave_diam*2*sin(wave_ang)) { //repeat wave across x axis
-        for (let y_wave = wave_diam/2; y_wave <= 200; y_wave += 100 - wave_diam*2*cos(wave_ang)) { //repeat wave across y axis
-          wave(x_wave, y_wave);
-        };
-      }
-      translate(wave_diam*2*sin(wave_ang), wave_diam*2*cos(wave_ang), 0);
+  push();
+  //draws waves in opposite direction
+  if (wave_flip == true) {
+    rotate(90);
+    translate(200, -400);
+  } 
+  
+  for (let i = 0; i < 2; i++) {
+    for (let x_wave = wave_diam/2; x_wave <= 200; x_wave += 100 - wave_diam*2*sin(wave_ang)) { //repeat wave across x axis
+      for (let y_wave = wave_diam/2; y_wave <= 200; y_wave += 100 - wave_diam*2*cos(wave_ang)) { //repeat wave across y axis
+        wave(x_wave, y_wave);
+      };
     }
-    pop();
+    translate(wave_diam*2*sin(wave_ang), wave_diam*2*cos(wave_ang), 0); //connects to end of wave shape
+  }
+  pop();
 
-    if (lily_rand == true) {
+  //allows random variables for lilypads
+  if (lily_rand == true) {
+    for (let i = 0; i < lily_num; i++) {
       rot_lily += random(10, 100);
-      scal_lily = random(0.4, 1);
-      x_lily = random(0 + lilysize*scal_lily, 200 - lilysize*scal_lily);
-      y_lily = random(0 + lilysize*scal_lily, 200 - lilysize*scal_lily);
-    } else if (lily_rand == false) {
-      if (lily_grad == true) {
-        for (let i = 0; i < lily_num; i++) {
-          //lilypad shadow translation
-          push();
-          translate(x_lily + shad_off, y_lily + shad_off, 0);
-          rotate(rot_lily);
-          scale(scal_lily);
-          shad("lily");
-          pop();
+      scal_lily = random(0.3, 1);
+      x_lily = random(0, 200);
+      y_lily = random(0, 200);
 
-          //lilypad translation
-          push();
-          translate(x_lily, y_lily, 0);
-          rotate(rot_lily);
-          scale(scal_lily);
-          lilyp();
-          pop();
-
-          x_lily = lilysize*i;
-          y_lily = lilysize*i;
-          rot_lily += 30;
-          scal_lily -= i/50;
-        }
-      } else if (lily_grad == false) {
-        push();
-        rotate(rot_l);
-
-        //draw set number of lilypads
-        if (lily_num == 5) {
-          lily5.show();
-          lily4.show();
-          lily3.show();
-          lily2.show();
-          lily1.show();
-        } else if (lily_num == 4) {
-          lily4.show();
-          lily3.show();
-          lily2.show();
-          lily1.show();
-        } else if (lily_num == 3) {
-          lily3.show();
-          lily2.show();
-          lily1.show();
-        } else if (lily_num == 2) {
-          lily2.show();
-          lily1.show();
-        } else if (lily_num == 1) {
-          lily1.show();
-        }
-        pop();
+      shad(x_lily + shad_off, y_lily + shad_off, rot_lily, scal_lily, "lily");
+      lilyp(x_lily, y_lily, rot_lily, scal_lily);
+    }
+  } else if (lily_rand == false) {
+    //creates gradient of lilypads across the canvas
+    if (lily_grad == true) {
+      for (let i = 0; i < lily_num; i++) {
+        shad(x_lily + shad_off, y_lily + shad_off, rot_lily, scal_lily, "lily");
+        lilyp(x_lily, y_lily, rot_lily, scal_lily);
+        x_lily = lilysize*i;
+        y_lily = lilysize*i;
+        rot_lily += 30;
+        scal_lily -= i/50;
       }
-    }  
+    } else if (lily_grad == false) {
+      //draws predetermined lilypads
+      push();
+      rotate(rot_l);
+      //draw set number of lilypads
+      if (lily_num == 5) {
+        lily5.show();
+        lily4.show();
+        lily3.show();
+        lily2.show();
+        lily1.show();
+      } else if (lily_num == 4) {
+        lily4.show();
+        lily3.show();
+        lily2.show();
+        lily1.show();
+      } else if (lily_num == 3) {
+        lily3.show();
+        lily2.show();
+        lily1.show();
+      } else if (lily_num == 2) {
+        lily2.show();
+        lily1.show();
+      } else if (lily_num == 1) {
+        lily1.show();
+      }
+      pop();
+    }
+  }  
 
-    if (duckle_rand == true) {
-      x_duckle = random(10, 150);
-      y_duckle = random(40, 150);
+  //allows random variables for duckles
+  if (duckle_rand == true) {
+    for (let i = 0; i < duckle_num; i++) {
       rot_duckle += random(10, 40);
       scal_duckle = random(0.3, 0.9);
-    } else if (duckle_rand == false) {
-      push();
-      rotate(rot_d2);
-      //draw set number of duckles
-      if (duckle_num == 5) {
-        duckle5.show();
-        duckle4.show();
-        duckle3.show();
-        duckle2.show();
-        duckle1.show();
-      } else if (duckle_num == 4) {
-        duckle4.show();
-        duckle3.show();
-        duckle2.show();
-        duckle1.show();
-      } else if (duckle_num == 3) {
-        duckle3.show();
-        duckle2.show();
-        duckle1.show();
-      } else if (duckle_num == 2) {
-        duckle2.show();
-        duckle1.show();
-      } else if (duckle_num == 1) {
-        duckle1.show();
-      }
-      pop();
+      x_duckle = random(0, 200);
+      y_duckle = random(0, 200);
+
+      shad(x_duckle + shad_off, y_duckle + shad_off, rot_duckle, scal_duckle, "duck");
+      duckle(x_duckle, y_duckle, rot_duckle, scal_duckle);
     }
-    
-    if (ducky_rand == true) {
-      x_ducky = random(10, 100);
-      y_ducky = random(40, 150);
+  } else if (duckle_rand == false) {
+    //draws predetermined duckles
+    push();
+    rotate(rot_d2);
+    //draw set number of duckles
+    if (duckle_num == 5) {
+      duckle5.show();
+      duckle4.show();
+      duckle3.show();
+      duckle2.show();
+      duckle1.show();
+    } else if (duckle_num == 4) {
+      duckle4.show();
+      duckle3.show();
+      duckle2.show();
+      duckle1.show();
+    } else if (duckle_num == 3) {
+      duckle3.show();
+      duckle2.show();
+      duckle1.show();
+    } else if (duckle_num == 2) {
+      duckle2.show();
+      duckle1.show();
+    } else if (duckle_num == 1) {
+      duckle1.show();
+    }
+    pop();
+  }
+  
+  //allows random variables for duckys
+  if (ducky_rand == true) {
+    for (let i = 0; i < ducky_num; i++) {
       rot_ducky += random(10, 40);
       scal_ducky = random(0.7, 1.1);
-    } else if (ducky_rand == false) {
-      push();
-      rotate(rot_d);
-      //draw set number of duckys
-      if (ducky_num == 3) {
-        ducky3.show();
-        ducky2.show();
-        ducky1.show();
-      } else if (ducky_num == 2) {
-        ducky2.show();
-        ducky1.show();
-      } else if (ducky_num == 1) {
-        ducky1.show();
-      }
-      pop();
+      x_ducky = random(0, 200);
+      y_ducky = random(0, 200);
+
+      shad(x_ducky + shad_off, y_ducky + shad_off, rot_ducky, scal_ducky, "duck");
+      ducky(x_ducky, y_ducky, rot_ducky, scal_ducky);
     }
+  } else if (ducky_rand == false) {
+    //draws predetermined duckys
+    push();
+    rotate(rot_d);
+    //draw set number of duckys
+    if (ducky_num == 3) {
+      ducky3.show();
+      ducky2.show();
+      ducky1.show();
+    } else if (ducky_num == 2) {
+      ducky2.show();
+      ducky1.show();
+    } else if (ducky_num == 1) {
+      ducky1.show();
+    }
+    pop();
+  }
+
+  //rotates lilypads per cell
+  if (deg_l > 0) {
+    rot_l += deg_l;
+  }
+
+  //rotates duckles per cell
+  if (deg_d2 > 0) {
+    rot_d2 += deg_d2;
+  }
+
+  //rotates duckys per cell
+  if (deg_d > 0) {
+    rot_d += deg_d;
+  }
 }
